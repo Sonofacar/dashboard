@@ -1,6 +1,6 @@
 import pandas as pd
-import plotly.express as px
 import streamlit as st
+from plotnine import *
 
 # Load the data
 df = pd.read_csv('popular_names.csv')
@@ -15,8 +15,9 @@ selected_gender = st.selectbox('Gender', genders)
 
 # Making the graph
 Title = 'Popularity of ' + selected_name + ' by year since 1910'
-fig = px.line(df.loc[df.name == selected_name, :].loc[df.sex == selected_gender], x = 'year', y = 'n', hover_data = ['n'])
-fig.update_layout(title = Title)
+fig = (ggplot(df.loc[df.name == selected_name].loc[df.sex == selected_gender]) +
+       geom_line(aes(x = 'year', y = 'n')) +
+       labs(title = Title))
 
 # Delpoy the graph
-st.plotly_chart(fig)
+st.pyplot(ggplot.draw(fig))
