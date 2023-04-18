@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 
 # Load the data
-df = pd.read_csv('~/homework/Stat_386/class-participation/popular_names.csv')
+df = pd.read_csv('popular_names.csv')
 
 # Set up the dashboard
 st.title('Popular Baby Names')
